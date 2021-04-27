@@ -2,17 +2,19 @@
 import './App.css';
 import React from 'react';
 
+const TaskLog = (id, completed) => {
+  console.log('Task ' + id + ' completed status = ' + completed);
+}
+
 const Task = ({id, name, description, completed}) => {
 
-  const TaskLog = (id, completed) => {
-    console.log('Task ' + id + ' completed status = ' + completed);
-  }
+  
   return (
     <div>
       <div>{id}</div>
       <div>{name}</div>
       <div>{description}</div>
-      <button className='complete-button' onClick={TaskLog.bind(this, id, completed)}>Completed</button>
+      <button className='complete-button' onClick={() => TaskLog(id, completed)}>Completed</button>
     </div>
      )
     }
