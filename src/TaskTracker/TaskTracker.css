@@ -1,0 +1,20 @@
+.TaskTracker {
+    position: relative;
+    margin-left: 7cm;
+
+}
+
+.taskName {
+    position: relative;
+    top: 0.5cm;
+    right: 2.5cm;
+    color:indigo;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.taskDesc {
+    position: relative;
+    left: 2cm;
+    color:indigo;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

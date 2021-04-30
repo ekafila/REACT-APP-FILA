@@ -1,20 +1,22 @@
 // import logo from './logo.svg';
 import './App.css';
 import React from 'react';
+import TaskAdd from './TaskTracker/TaskTracker';
 
 const TaskLog = (id, completed) => {
   console.log('Task ' + id + ' completed status = ' + completed);
 }
 
-const Task = ({id, name, description, completed}) => {
 
+const Task = ({id, name, description, completed}) => {
   
   return (
     <div>
       <div>{id}</div>
       <div>{name}</div>
       <div>{description}</div>
-      <button className='complete-button' onClick={() => TaskLog(id, completed)}>Completed</button>
+      <input type="checkbox" />
+      {/* <button className='complete-button' onClick={() => TaskLog(id, completed)}>Completed</button> */}
     </div>
      )
     }
@@ -31,6 +33,9 @@ class MyTodoList extends React.Component {
       ]
     }
 
+ 
+
+
   render() {
     return(
       <div> 
@@ -38,12 +43,16 @@ class MyTodoList extends React.Component {
       </div>
       )
     }
-  }  
+  } 
+
+  
 
 function App () {
   return(
     <div className='App'>
       <h1>Wonderful List</h1>
+      <TaskAdd />
+      <button>Add</button>
       <main>
         <MyTodoList />
       </main>
@@ -54,3 +63,34 @@ function App () {
 export default App;
 
 
+ //   handleClick = (event) => {
+  //     this.setState(currentState => {
+  //         const newTasks = [...currentState.tasks]
+  //         const name = TaskAdd.state.name
+  //         const description = TaskAdd.state.description
+  //         const taskLength = newTasks.length
+  //         newTasks[taskLength] = {
+  //           id: taskLength + 1,
+  //           name: name,
+  //           description: description,
+  //           completed: false
+  //         }
+  //         return {
+  //             state: newTasks
+  //         }
+  //     })
+  //   }
+    
+  //   onChanges(id) {
+   
+  //     tasks = tasks.map(task => {
+  //       if (task.id === id) {
+  //         task.completed = !task.completed
+  //       }
+  //       return (
+  //         task
+  //       )
+  //     })
+  //   }
+    
+  // }
