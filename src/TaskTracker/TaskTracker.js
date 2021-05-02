@@ -13,9 +13,6 @@ class TaskAdd extends React.Component {
         this.setState({[name]: value})
     }
 
-
-
-
     render () {
         return (
             <div>
@@ -23,7 +20,6 @@ class TaskAdd extends React.Component {
                 <div class='taskDesc'>Description:</div>
                 <input class='nameInput' value={this.state.name} onChange={this.handleChange} name='name'/>
                 <input class='descInput' value={this.state.description} onChange={this.handleChange} name='description'/>
-                {/* <button onClick={this.handleClick()}>Add</button> */}
             </div>
         )
     }
