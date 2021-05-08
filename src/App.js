@@ -13,8 +13,8 @@ function App () {
   return(
     <div className='App'>
       <h1>Wonderful List</h1>
-      <TaskAdd />
-      <button onClick={new MyTodoList().handleClick}>Add</button>
+      <TaskAdd handleClick={this.handleClick} />
+      
       {/* <button>Add</button> */}
       <main>
         <MyTodoList />

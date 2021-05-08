@@ -12,25 +12,8 @@ class MyTodoList extends React.Component {
         {id: 6, name: 'B-Day party', description: 'Find a present', completed: false}
         ]
       }
-  
-      handleClick = (event) => {
-        this.setState(currentState => {
-            const newTasks = [...currentState.tasks]
-            const name = TaskAdd.state.name
-            const description = TaskAdd.state.description
-            const taskLength = newTasks.length
-            newTasks[taskLength] = {
-              id: taskLength + 1,
-              name: name,
-              description: description,
-              completed: false
-            }
-            return {
-                state: newTasks
-            }
-        })
-      }
-   
+
+        
     render() {
       return(
         <div> 
