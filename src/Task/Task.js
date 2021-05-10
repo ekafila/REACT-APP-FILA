@@ -1,5 +1,5 @@
 import React from 'react';
-import MyTodoList from '../MyTodoList/MyTodoList.js'
+import TaskButton from '../TaskButton/TaskButton';
 
 // function onChanges(id) {
 //     Task[id].completed = !Task.completed
@@ -7,16 +7,17 @@ import MyTodoList from '../MyTodoList/MyTodoList.js'
 //       Task[id]
 //   }
 
-const Task = ({id, name, description, completed}) => {
-  
+const Task = ({id, name, description, completed, handleClickCompleted}) => {
+  completed ='Status: ' + completed
+
     return (
       <div>
-        <div>{id}</div>
-        <div>{name}</div>
-        <div>{description}</div>
-        <input type="checkbox" />
-        {/* <input type="checkbox" onChange={onChanges(this.id)}/> */}
-        {/* <button className='complete-button' onClick={() => TaskLog(id, completed)}>Completed</button> */}
+        <div>ID: {id}</div>
+        <div>Task name: {name}</div>
+        <div>Description: {description}</div>
+        <div>{completed}</div>
+        <TaskButton task_id={id} task_completed={completed} handleClickCompleted={handleClickCompleted} />
+        {/* <input type="checkbox"/> */}
       </div>
        )
       }

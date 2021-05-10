@@ -1,7 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import TaskAdd from './TaskTracker/TaskTracker';
 import MyTodoList from './MyTodoList/MyTodoList.js';
 
 // const TaskLog = (id, completed) => {
@@ -10,12 +9,12 @@ import MyTodoList from './MyTodoList/MyTodoList.js';
   
 
 function App () {
+
+
+  
   return(
     <div className='App'>
       <h1>Wonderful List</h1>
-      <TaskAdd handleClick={this.handleClick} />
-      
-      {/* <button>Add</button> */}
       <main>
         <MyTodoList />
       </main>
