@@ -1,6 +1,8 @@
 .TaskTracker {
     position: relative;
     margin-left: 7cm;
+    flex-direction: column;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
 }
 
@@ -8,13 +10,14 @@
     position: relative;
     top: 0.5cm;
     right: 2.5cm;
-    color:indigo;
+    color:rgb(123, 240, 248);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .taskDesc {
     position: relative;
     left: 2cm;
-    color:indigo;
+    color:rgb(123, 240, 248);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+

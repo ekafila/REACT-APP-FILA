@@ -1,6 +1,11 @@
 import React from 'react';
-import './TaskTracker.css';
 import AddButton from '../AddButton/AddButton';
+import classnames from "classnames/bind"
+
+import styles from "./TaskTracker.module.scss"
+import { ThemeContext } from "../ThemeContext";
+
+const cx = classnames.bind(styles)
 
 
 const TaskAdd = ( {name, description, handleChange, handleClick} ) => {
@@ -16,6 +21,18 @@ const TaskAdd = ( {name, description, handleChange, handleClick} ) => {
         )
     }
 
+    export const nameInput = ({ value, onChange, placeholder }) => (
+        <ThemeContext.Consumer>
+          {theme => (
+            <input
+              className={cx("input", `input-theme-${theme}`)}
+              value={value}
+              onChange={onChange}
+              placeholder={placeholder}
+            />
+          )}
+        </ThemeContext.Consumer>
+      )
 export default TaskAdd;
 
   
