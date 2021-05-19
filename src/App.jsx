@@ -47,15 +47,16 @@ class App extends React.Component {
           </div>
         </div>
 
-        <div className='App'>
-          <h1>Wonderful List</h1>
-          <main>
-            <MyTodoList />
-          </main>
-        </div>
+
 
         <ThemeContext.Provider value={this.state.theme}>
           <Content />
+          <div className='App'>
+            <h1>Wonderful List</h1>
+            <main>
+              <MyTodoList />
+            </main>
+          </div>
         </ThemeContext.Provider>
         </div>
 

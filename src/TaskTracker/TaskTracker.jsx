@@ -21,18 +21,6 @@ const TaskAdd = ( {name, description, handleChange, handleClick} ) => {
         )
     }
 
-    export const nameInput = ({ value, onChange, placeholder }) => (
-        <ThemeContext.Consumer>
-          {theme => (
-            <input
-              className={cx("input", `input-theme-${theme}`)}
-              value={value}
-              onChange={onChange}
-              placeholder={placeholder}
-            />
-          )}
-        </ThemeContext.Consumer>
-      )
 export default TaskAdd;
 
   

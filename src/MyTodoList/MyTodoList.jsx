@@ -1,6 +1,9 @@
 import React from 'react';
 import List from '../List/List';
 import TaskAdd from '../TaskTracker/TaskTracker';
+import classnames from "classnames/bind";
+import { Content } from "../Content/Content";
+import { DEFAULT_THEME, ThemeContext } from '../ThemeContext';
 
 class MyTodoList extends React.Component {
     state = {
@@ -52,8 +55,10 @@ class MyTodoList extends React.Component {
     render() {
       return(
         <div> 
-          <TaskAdd name={this.state.name} description={this.state.description} handleChange={this.handleChange} handleClick={this.handleClick} />
-          <List tasks={this.state.tasks} handleClickCompleted={this.handleClickCompleted}/>
+            <TaskAdd name={this.state.name} description={this.state.description} handleChange={this.handleChange} handleClick={this.handleClick} />
+            <List tasks={this.state.tasks} handleClickCompleted={this.handleClickCompleted}/>
+            
+
         </div>
         )
       }
