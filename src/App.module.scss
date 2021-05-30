@@ -7,6 +7,7 @@ label {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  top: 2cm;
 
   min-height: 100vh;
 
@@ -26,4 +27,58 @@ label {
 
   display: flex;
   flex-direction: column;
+}
+
+.projects_and_tasks {
+  display: flex;
+  flex-direction: row;
+  margin: 0 -50px;
+}
+
+.projects {
+  margin: 0 50px;
+}
+
+.tasks {
+  margin: 0 50px;
+}
+
+.new_task {
+  display: flex;
+  flex-direction: column;
+}
+
+.header_to_add_task {
+  display: flex;
+  left: 40px;
+  color: rgb(255, 255, 255);
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-theme-light {
+      background: white;
+  }
+
+  &-theme-dark {
+      background: #000000;
+  }
+}
+
+.header {
+  display: flex;
+  // position: relative;
+  left: 20px;
+
+  &-theme-light {
+      color: black;
+  }
+
+  &-theme-dark {
+      color: rgb(255, 255, 255);
+  }
 }
