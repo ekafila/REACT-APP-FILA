@@ -8,6 +8,10 @@ import { DEFAULT_THEME, ThemeContext } from '../ThemeContext';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import styles from '../MyTodoList/MyTodoList.module.scss';
 import ProjectInput from '../ProjectInput/ProjectInput';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+const store = createStore(rootReducer)
 
 const cx = classnames.bind(styles)
 
@@ -142,68 +146,70 @@ class MyTodoList extends React.Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <div className={cx('page', `page-theme-${this.state.theme}`)}>
-          <div className={cx('radios', `radios-theme-${this.state.theme}`)}>
-            <div>
-              <input
-                type='radio'
-                name='theme'
-                id='light'
-                value='light'
-                checked={this.state.theme === 'light'}
-                onChange={this.handleThemeChange}
-              />
-              <label htmlFor='light'>Light</label>
-            </div>
-
-            <div>
-            <input
-                type='radio'
-                name='theme'
-                id='dark'
-                value='dark'
-                checked={this.state.theme === 'dark'}
-                onChange={this.handleThemeChange}
-              />
-              <label htmlFor='light'>Dark</label>
-            </div>
-          </div>
-          <div className={cx('projects_and_tasks')}>
-            <Route path='/'>
-              <div className={cx('projects')}>
-              <h1>Wonderful List</h1>
-                <h1>
-                  <Link className={cx('header', `header-theme-${this.state.theme}`)} to='/'>Home</Link>
-                </h1>
-                <h1 className={cx('header', `header-theme-${this.state.theme}`)}>Projects List:</h1>
-                <div>
-                  <ProjectInput name={this.state.name} handleChange={this.handleChange} handleClick={this.handleClickProject}/>
-                </div>
-                <ListProjects projectsById={this.state.projectsById} />
+      <Provider store={store}>
+        <BrowserRouter>
+          <div className={cx('page', `page-theme-${this.state.theme}`)}>
+            <div className={cx('radios', `radios-theme-${this.state.theme}`)}>
+              <div>
+                <input
+                  type='radio'
+                  name='theme'
+                  id='light'
+                  value='light'
+                  checked={this.state.theme === 'light'}
+                  onChange={this.handleThemeChange}
+                />
+                <label htmlFor='light'>Light</label>
               </div>
-            </Route>
-            <Switch>
-              <Route exact path='/'>
-                <div className={cx('tasks')}>
-                  <h1 className={cx('header', `header-theme-${this.state.theme}`)}>Tasks List</h1>
-                  <ThemeContext.Provider value={this.state.theme}>
-                    <div className={cx('new_task')}>
-                      <TaskInput name={this.state.name} description={this.state.description} handleChange={this.handleChange} handleClick={this.handleClick} project_id={'no_project'} />
-                    </div>
-                  <List tasksById={this.state.tasksById} handleClickCompleted={this.handleClickCompleted} />
-                  </ThemeContext.Provider>
+
+              <div>
+                <input
+                  type='radio'
+                  name='theme'
+                  id='dark'
+                  value='dark'
+                  checked={this.state.theme === 'dark'}
+                  onChange={this.handleThemeChange}
+                />
+                <label htmlFor='light'>Dark</label>
+              </div>
+            </div>
+            <div className={cx('projects_and_tasks')}>
+              <Route path='/'>
+                <div className={cx('projects')}>
+                  <h1>Wonderful List</h1>
+                  <h1>
+                    <Link className={cx('header', `header-theme-${this.state.theme}`)} to='/'>Home</Link>
+                  </h1>
+                  <h1 className={cx('header', `header-theme-${this.state.theme}`)}>Projects List:</h1>
+                  <div>
+                    <ProjectInput name={this.state.name} handleChange={this.handleChange} handleClick={this.handleClickProject} />
+                  </div>
+                  <ListProjects projectsById={this.state.projectsById} />
                 </div>
               </Route>
-              <Route path='/projects/:projectId/'>
-                <ThemeContext.Provider value={this.state.theme}>
-                  <ProjectTasks projectsById={this.state.projectsById} tasksById={this.state.tasksById} handleClickCompleted={this.handleClickCompleted} handleChange={this.handleChange} handleClick={this.handleClick} input_name={this.state.name} input_description={this.state.description} />
-                </ThemeContext.Provider>
-              </Route>
-            </Switch>
+              <Switch>
+                <Route exact path='/'>
+                  <div className={cx('tasks')}>
+                    <h1 className={cx('header', `header-theme-${this.state.theme}`)}>Tasks List</h1>
+                    <ThemeContext.Provider value={this.state.theme}>
+                      <div className={cx('new_task')}>
+                        <TaskInput name={this.state.name} description={this.state.description} handleChange={this.handleChange} handleClick={this.handleClick} project_id={'no_project'} />
+                      </div>
+                      <List tasksById={this.state.tasksById} handleClickCompleted={this.handleClickCompleted} />
+                    </ThemeContext.Provider>
+                  </div>
+                </Route>
+                <Route path='/projects/:projectId/'>
+                  <ThemeContext.Provider value={this.state.theme}>
+                    <ProjectTasks projectsById={this.state.projectsById} tasksById={this.state.tasksById} handleClickCompleted={this.handleClickCompleted} handleChange={this.handleChange} handleClick={this.handleClick} input_name={this.state.name} input_description={this.state.description} />
+                  </ThemeContext.Provider>
+                </Route>
+              </Switch>
+            </div>
           </div>
-        </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      </Provider>
     )
   }
 }
