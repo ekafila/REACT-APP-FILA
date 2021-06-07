@@ -1,6 +1,11 @@
 import React from 'react';
-import './TaskTracker.css';
 import AddButton from '../AddButton/AddButton';
+import classnames from "classnames/bind"
+
+import styles from "./TaskTracker.module.scss"
+import { ThemeContext } from "../ThemeContext";
+
+const cx = classnames.bind(styles)
 
 
 const TaskAdd = ( {name, description, handleChange, handleClick} ) => {
