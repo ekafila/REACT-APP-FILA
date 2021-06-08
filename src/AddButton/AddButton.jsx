@@ -1,21 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import {handleClick} from '../Actions/TaskProjectsAction'
 
-import classnames from "classnames/bind"
 
-import styles from "./AddButton.module.scss"
-import { ThemeContext } from "../ThemeContext"
+const mapDispatchToProps = (dispatch) => ({
+  dispatchOnClickTaskAdd: (project_id) => dispatch(handleClick(project_id))
+})
 
-const cx = classnames.bind(styles)
-
-const AddButton = ({ handleClick, project_id }) => {
-
-    return (
-      <ThemeContext.Consumer>
-        {(theme) => (
-          <button value={project_id} className={cx("addButton", `addButton-theme-${theme}`)} onClick={handleClick}>Add</button>
-        )}
-    </ThemeContext.Consumer>
-    )
+const AddButtonComponent = ({ dispatchOnClickTaskAdd, project_id }) => {
+  const onClickTaskAdd = (event) => {
+    dispatchOnClickTaskAdd(event.target.value)
   }
+  return (
+    <button value={project_id} onClick={onClickTaskAdd}>Add</button>
+  )
+}
 
-export default AddButton;
+export const AddButton = connect(null, mapDispatchToProps)(AddButtonComponent);

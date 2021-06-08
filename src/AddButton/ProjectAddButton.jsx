@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { handleClickProject } from '../../actions/tasks_projects'
+import { handleClickProject } from '../Actions/TaskProjectsAction'
 
 
 const mapDispatchToProps = (dispatch) => ({

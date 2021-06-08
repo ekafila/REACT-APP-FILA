@@ -1,12 +1,12 @@
 import React from 'react';
 import List from '../List/List';
-import TaskInput from '../TaskInput/TaskInput';
+import {TaskInput} from '../TaskInput/TaskInput';
 import classnames from "classnames/bind";
 import ListProjects from '../List/ListProjects';
-import ProjectTasks from '../Projects/ProjectsTasks';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
+import {ProjectTasks} from '../Projects/ProjectsTasks';
+import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom'
 import styles from '../MyTodoList/MyTodoList.module.scss';
-import ProjectInput from '../ProjectInput/ProjectInput';
+import {ProjectInput} from '../ProjectInput/ProjectInput';
 import { handleThemeChange } from '../Actions/ThemeAction';
 import { connect } from 'react-redux'
 
@@ -22,8 +22,75 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchOnThemeChange: (theme) => dispatch(handleThemeChange(theme))
 })
 
+const MyTodoListComponent = ({ tasksById, projectsById, theme, dispatchOnThemeChange }) => {
+  const onThemeChange = (event) => {
+    dispatchOnThemeChange(event.target.value)
+  }
+  return (
+    <BrowserRouter>
+      <div className={cx('page', `page-theme-${theme}`)}>
+        <div className={cx('radios', `radios-theme-${theme}`)}>
+          <div>
+            <input
+              type='radio'
+              name='theme'
+              id='light'
+              value='light'
+              checked={theme === 'light'}
+              onChange={onThemeChange}
+            />
+            <label htmlFor='light'>Light</label>
+          </div>
+
+          <div>
+            <input
+              type='radio'
+              name='theme'
+              id='dark'
+              value='dark'
+              checked={theme === 'dark'}
+              onChange={onThemeChange}
+            />
+            <label htmlFor='light'>Dark</label>
+          </div>
+        </div>
+        <div className={cx('projects_and_tasks')}>
+          <Route path='/'>
+            <div className={cx('projects')}>
+              <h1>Wonderful List</h1>
+              <h1>
+                <Link className={cx('header', `header-theme-${theme}`)} to='/'>Home</Link>
+              </h1>
+              <h1 className={cx('header', `header-theme-${theme}`)}>Projects List:</h1>
+              <div>
+                <ProjectInput/>
+              </div>
+              <ListProjects projectsById={projectsById} />
+            </div>
+          </Route>
+          <Switch>
+            <Route exact path='/'>
+              <div className={cx('tasks')}>
+                <h1 className={cx('header', `header-theme-${theme}`)}>Tasks List</h1>
+                  <div className={cx('new_task')}>
+                    <TaskInput project_id={'no_project'} />
+                  </div>
+                  <List tasksById={tasksById} />
+              </div>
+            </Route>
+            <Route path='/projects/:projectId/'>
+                <ProjectTasks />
+            </Route>
+            <Redirect to='/' />
+          </Switch>
+        </div>
+      </div>
+    </BrowserRouter>
+  )
+}
 
 
+export const MyTodoList = connect(mapStateToProps, mapDispatchToProps)(MyTodoListComponent);
 
 // class MyTodoList extends React.Component {
 //   state = normalizeState(projects)
@@ -103,76 +170,3 @@ const mapDispatchToProps = (dispatch) => ({
 //       }
 //     })
 //   }
-
-const MyTodoListComponent = ({ tasksById, projectsById, theme, dispatchOnThemeChange }) => {
-  const onThemeChange = (event) => {
-    dispatchOnThemeChange(event.target.value)
-  }
-  return (
-    <BrowserRouter>
-      <div className={cx('page', `page-theme-${this.state.theme}`)}>
-        <div className={cx('radios', `radios-theme-${this.state.theme}`)}>
-          <div>
-            <input
-              type='radio'
-              name='theme'
-              id='light'
-              value='light'
-              checked={this.state.theme === 'light'}
-              onChange={onThemeChange}
-            />
-            <label htmlFor='light'>Light</label>
-          </div>
-
-          <div>
-            <input
-              type='radio'
-              name='theme'
-              id='dark'
-              value='dark'
-              checked={this.state.theme === 'dark'}
-              onChange={onThemeChange}
-            />
-            <label htmlFor='light'>Dark</label>
-          </div>
-        </div>
-        <div className={cx('projects_and_tasks')}>
-          <Route path='/'>
-            <div className={cx('projects')}>
-              <h1>Wonderful List</h1>
-              <h1>
-                <Link className={cx('header', `header-theme-${theme}`)} to='/'>Home</Link>
-              </h1>
-              <h1 className={cx('header', `header-theme-${theme}`)}>Projects List:</h1>
-              <div>
-                <ProjectInput name={this.state.name} handleChange={this.handleChange} handleClick={this.handleClickProject} />
-              </div>
-              <ListProjects projectsById={projectsById} />
-            </div>
-          </Route>
-          <Switch>
-            <Route exact path='/'>
-              <div className={cx('tasks')}>
-                <h1 className={cx('header', `header-theme-${theme}`)}>Tasks List</h1>
-                <ThemeContext.Provider value={this.state.theme}>
-                  <div className={cx('new_task')}>
-                    <TaskInput name={this.state.name} description={this.state.description} handleChange={this.handleChange} handleClick={this.handleClick} project_id={'no_project'} />
-                  </div>
-                  <List tasksById={tasksById} handleClickCompleted={this.handleClickCompleted} />
-                </ThemeContext.Provider>
-              </div>
-            </Route>
-            <Route path='/projects/:projectId/'>
-              <ThemeContext.Provider value={this.state.theme}>
-                <ProjectTasks projectsById={this.state.projectsById} tasksById={this.state.tasksById} handleClickCompleted={this.handleClickCompleted} handleChange={this.handleChange} handleClick={this.handleClick} input_name={this.state.name} input_description={this.state.description} />
-              </ThemeContext.Provider>
-            </Route>
-          </Switch>
-        </div>
-      </div>
-    </BrowserRouter>
-  )
-}
-
-
-export default MyTodoList = connect(mapStateToProps, mapDispatchToProps)(MyTodoListComponent);

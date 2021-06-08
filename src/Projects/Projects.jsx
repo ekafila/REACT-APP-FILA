@@ -5,7 +5,7 @@ const mapStateToProps = (state) => ({
     theme: state.theme.theme
 })
 
-const Project = ({ id, name }) => {
+const ProjectComponent = ({ id, name }) => {
     const project_path = `/projects/${id}/`
     return (
                 <div>
@@ -13,4 +13,4 @@ const Project = ({ id, name }) => {
                 </div>
             )}
 
-export const Project = connect(mapStateToProps)(Project);
+export const Project = connect(mapStateToProps)(ProjectComponent);

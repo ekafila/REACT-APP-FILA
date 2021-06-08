@@ -1,5 +1,5 @@
 import { INPUT_CHANGE, TASK_ADD, PROJECT_ADD, TASK_COMPLETED } from '../Actions/TaskProjectsAction';
-import normalizeState from '../MyTodoList/MyTodoList';
+import normalizeState from '../MyTodoList/NormalizeState';
 
 const projects = [
   {
