@@ -1,20 +1,25 @@
 import React from 'react';
 import MyTodoList from './MyTodoList/MyTodoList';
-import { DEFAULT_THEME, ThemeContext } from './ThemeContext';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { rootReducer } from './Reducer/index'
+
+const store = createStore(rootReducer)
 
 class App extends React.Component {
   state = {
     theme: DEFAULT_THEME
   }
 
-  render (){
-    return(
-      <div>
-            <main>
-              <MyTodoList/>
-            </main>
-          </div>
-
+  render() {
+    return (
+      <Provider store={store}>
+        <div>
+          <main>
+            <MyTodoList />
+          </main>
+        </div>
+      </Provider>
     )
   }
 }
