@@ -7,12 +7,12 @@ import { ThemeContext } from "../ThemeContext"
 
 const cx = classnames.bind(styles)
 
-const AddButton = ({ handleClick }) => {
+const AddButton = ({ handleClick, project_id }) => {
 
     return (
       <ThemeContext.Consumer>
         {(theme) => (
-          <button className={cx("addButton", `addButton-theme-${theme}`)} onClick={handleClick}>Add</button>
+          <button value={project_id} className={cx("addButton", `addButton-theme-${theme}`)} onClick={handleClick}>Add</button>
         )}
     </ThemeContext.Consumer>
     )
