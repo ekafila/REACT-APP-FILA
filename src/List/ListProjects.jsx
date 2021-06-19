@@ -1,4 +1,4 @@
-import Project from '../Projects/Projects'
+import {Project} from '../Projects/Projects'
 
 const ListProjects = ({ projectsById }) => {
     const projects = Object.values(projectsById)

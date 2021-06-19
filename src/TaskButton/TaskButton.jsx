@@ -1,9 +1,19 @@
 import React from 'react';
+import {handleClickCompleted} from '../Actions/TaskProjectsAction'
+import { connect } from 'react-redux';
 
-const taskButton=({task_id, handleClickCompleted}) => {
-    return (
-        <button value={task_id} onClick={handleClickCompleted}>Success!</button>
-    )
-}
+const mapDispatchToProps = (dispatch) => ({
+    dispatchOnClickTaskCompleted: (task_id) => dispatch(handleClickCompleted(task_id))
+  })
 
-export default taskButton;
+  const TaskButtonComponent = ({ task_id, dispatchOnClickTaskCompleted }) => {
+    const onClickTaskCompleted = (event) => {
+      dispatchOnClickTaskCompleted(event.target.value)
+    }
+  
+      return (
+        <button value={task_id} onClick={onClickTaskCompleted}>Success!</button>
+      )
+    }
+  
+  export const TaskButton = connect(null, mapDispatchToProps)(TaskButtonComponent);

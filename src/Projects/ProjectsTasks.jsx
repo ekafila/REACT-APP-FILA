@@ -1,32 +1,42 @@
 import List from '../List/List'
-import TaskInput from '../TaskInput/TaskInput'
-import { useParams } from 'react-router-dom'
-import ProjectInput from '../ProjectInput/ProjectInput'
+import {TaskInput} from '../TaskInput/TaskInput'
+import { useParams, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 
-const ProjectTasks = ({ projectsById, tasksById, handleClickCompleted, handleChange, handleClick, input_name, input_description }) => {
+
+const mapStateToProps = (state) => ({
+    tasksById: state.tasks_projects.tasksById,
+    projectsById: state.tasks_projects.projectsById,
+    theme: state.theme.theme
+})
+
+const ProjectTasksComponent = ({ tasksById, projectsById, theme }) => {
     const { projectId } = useParams()
-    console.log(projectId)
-    const project_name = projectsById[projectId].name
-    console.log(projectsById)
-    const project_task_ids = projectsById[projectId].tasksIds.map(id => String(id))
-    console.log(project_task_ids)
-    console.log(Object.keys(tasksById).filter(key => project_task_ids.includes(key)))
-    const project_tasks = Object.keys(tasksById).filter(key => project_task_ids.includes(key)).reduce((obj, key) => {
-        return {
-            ...obj,
-            [key]: tasksById[key]
-        }
-    }, {})
-    console.log(project_tasks)
-    return (
-        <div>
+    if (projectId in projectsById) {
+        const project_name = projectsById[projectId].name
+        const project_task_ids = projectsById[projectId].tasksIds.map(id => String(id))
+        const project_tasks = Object.keys(tasksById).filter(key => project_task_ids.includes(key)).reduce((object, key) => {
+            return {
+                ...object,
+                [key]: tasksById[key]
+            }
+        }, {})
+
+        return (
             <div >
-                <TaskInput name={input_name} description={input_description} handleChange={handleChange} handleClick={handleClick} project_id={projectId} />
+                <h1 >{project_name}</h1>
+                <div>
+                    <TaskInput project_id={projectId} />
+                </div>
+                <List tasksById={project_tasks} />
             </div>
-            <List tasksById={project_tasks} handleClickCompleted={handleClickCompleted} />
-        </div>
-    )
+        )
+    } else {
+        return (
+            <Redirect to='/' />
+        )
+    }
 }
 
-export default ProjectTasks;
+export const ProjectTasks = connect(mapStateToProps)(ProjectTasksComponent);

@@ -1,8 +1,13 @@
 import React from 'react';
-import TaskButton from '../TaskButton/TaskButton';
+import {TaskButton} from '../TaskButton/TaskButton';
+import { connect } from 'react-redux';
+import {handleClickCompleted} from '../Actions/TaskProjectsAction'
 
+const mapStateToProps = (state) => ({
+  theme: state.theme.theme
+})
 
-const Task = ({id, name, description, completed, handleClickCompleted}) => {
+const TaskComponent = ({id, name, description, completed}) => {
   completed ='Status: ' + completed
 
     return (
@@ -17,4 +22,4 @@ const Task = ({id, name, description, completed, handleClickCompleted}) => {
       }
 
 
-export default Task;
+export const Task = connect(mapStateToProps)(TaskComponent);
