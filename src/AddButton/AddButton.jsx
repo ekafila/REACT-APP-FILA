@@ -1,18 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {handleClick} from '../Actions/TaskProjectsAction'
+import { fetchClickTaskAddUpload } from '../Actions/TaskProjectsAction'
 
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchOnClickTaskAdd: (project_id) => dispatch(handleClick(project_id))
+  dispatchOnFetchClickTaskUpload: (project_id) => dispatch(fetchClickTaskAddUpload(project_id))
 })
 
-const AddButtonComponent = ({ dispatchOnClickTaskAdd, project_id }) => {
-  const onClickTaskAdd = (event) => {
-    dispatchOnClickTaskAdd(event.target.value)
+const AddButtonComponent = ({ dispatchOnFetchClickTaskUpload, project_id }) => {
+  const onFetchClickTaskUpload = (event) => {
+    dispatchOnFetchClickTaskUpload(event.target.value)
   }
+
   return (
-    <button value={project_id} onClick={onClickTaskAdd}>Add</button>
+    <button value={project_id} onClick={onFetchClickTaskUpload}>Add</button>
   )
 }
 
